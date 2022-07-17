@@ -74,7 +74,7 @@ class HomeFragment : Fragment() {
                     it.toLong(),
                     "Video $it",
                     "Description $it".repeat(it + 1),
-                    "https://picsum.photos/",
+                    "https://picsum.photos/320/180?random=$it",
                     it * 15L
                 )
             }

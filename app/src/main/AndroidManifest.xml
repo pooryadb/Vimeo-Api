@@ -3,6 +3,8 @@
     xmlns:tools="http://schemas.android.com/tools"
     package="db.poorya.namavatest">
 
+    <uses-permission android:name="android.permission.INTERNET" />
+
     <application
         android:name=".utils.AppCore"
         android:allowBackup="true"
