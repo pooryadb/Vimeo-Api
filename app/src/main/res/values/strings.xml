@@ -1,4 +1,5 @@
 <resources>
     <string name="app_name">Namava test</string>
     <string name="search">Search</string>
+    <string name="please_search_title_to_show_videos">لطفا برای نمایش ویدئو عنوانی را جست و جو کنید</string>
 </resources>

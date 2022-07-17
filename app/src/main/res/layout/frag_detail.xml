@@ -41,7 +41,13 @@
                 android:layout_width="@dimen/icon_big"
                 android:layout_height="@dimen/icon_big"
                 android:layout_gravity="center"
-                android:background="@drawable/circle"
+                app:srcCompat="@drawable/circle"
+                app:tint="?attr/colorGlass" />
+
+            <androidx.appcompat.widget.AppCompatImageView
+                android:layout_width="@dimen/icon_big"
+                android:layout_height="@dimen/icon_big"
+                android:layout_gravity="center"
                 app:srcCompat="@drawable/ic_play_filled"
                 app:tint="?attr/colorControlHighlight" />
 

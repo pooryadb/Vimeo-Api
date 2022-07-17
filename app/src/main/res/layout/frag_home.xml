@@ -4,6 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:animateLayoutChanges="true"
     android:clipToPadding="false"
     android:orientation="vertical">
 
@@ -28,11 +29,54 @@
 
     </com.google.android.material.textfield.TextInputLayout>
 
-    <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/rcVideos"
+    <FrameLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
-        tools:listitem="@layout/item_video" />
+        android:layout_height="match_parent">
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/rcVideos"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layoutAnimation="@anim/recycler_anim"
+            app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+            tools:listitem="@layout/item_video" />
+
+        <androidx.appcompat.widget.LinearLayoutCompat
+            android:id="@+id/layEmpty"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:gravity="center"
+            android:orientation="vertical">
+
+            <FrameLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content">
+
+                <androidx.appcompat.widget.AppCompatImageView
+                    android:layout_width="@dimen/circle_big"
+                    android:layout_height="@dimen/circle_big"
+                    android:layout_gravity="center"
+                    app:srcCompat="@drawable/circle"
+                    app:tint="?attr/colorControlHighlight" />
+
+                <androidx.appcompat.widget.AppCompatImageView
+                    android:layout_width="@dimen/icon_normal"
+                    android:layout_height="@dimen/icon_normal"
+                    android:layout_gravity="center"
+                    app:srcCompat="@drawable/ic_broken_heart" />
+
+            </FrameLayout>
+
+            <com.google.android.material.textview.MaterialTextView
+                style="@style/txt.h1.medium"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/padding"
+                android:text="@string/please_search_title_to_show_videos" />
+
+        </androidx.appcompat.widget.LinearLayoutCompat>
+
+    </FrameLayout>
 
 </androidx.appcompat.widget.LinearLayoutCompat>

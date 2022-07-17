@@ -10,4 +10,6 @@
     <dimen name="icon_normal">24dp</dimen>
     <dimen name="icon_big">48dp</dimen>
 
+    <dimen name="circle_big">80dp</dimen>
+
 </resources>

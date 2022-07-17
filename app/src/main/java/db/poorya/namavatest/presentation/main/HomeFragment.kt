@@ -13,7 +13,7 @@ import db.poorya.namavatest.databinding.FragHomeBinding
 import db.poorya.namavatest.domain.model.VideoModel
 import db.poorya.namavatest.ext.hideKeyboard
 import db.poorya.namavatest.ext.onChange
-import db.poorya.namavatest.ext.toast
+import db.poorya.namavatest.ext.toGone
 import db.poorya.namavatest.presentation.main.adapter.VideoAdapter
 import db.poorya.namavatest.utils.AppConfig
 import javax.inject.Inject
@@ -42,8 +42,6 @@ class HomeFragment : Fragment() {
 
         binding?.rcVideos?.apply {
             videoAdapter.onClickListener = {
-                // TODO: open detail fragment
-                requireContext().toast(it.title)
                 findNavController().navigate(
                     HomeFragmentDirections.actionHomeFragToDetailFrag(it)
                 )
@@ -72,6 +70,7 @@ class HomeFragment : Fragment() {
     }
 
     private fun doSearch(query: String) {
+        binding?.layEmpty?.toGone()
         videoAdapter.submitList(
             (0..10).map {
                 VideoModel(
@@ -83,6 +82,10 @@ class HomeFragment : Fragment() {
                 )
             }
         )
+    }
+
+    private fun initObservers() {
+        // TODO
     }
 
 }

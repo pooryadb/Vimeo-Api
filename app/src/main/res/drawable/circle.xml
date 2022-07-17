@@ -4,6 +4,6 @@
     <size
         android:width="20dp"
         android:height="20dp" />
-    <solid android:color="?attr/colorGlass" />
+    <solid android:color="?attr/colorControlNormal" />
 
 </shape>
