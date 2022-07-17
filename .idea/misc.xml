@@ -3,12 +3,25 @@
   <component name="DesignSurface">
     <option name="filePathToZoomLevelMap">
       <map>
+        <entry key="..\:/Work/Android/AS-WorkSpace/namavatest/app/src/main/res/drawable-v24/circle.xml" value="0.1255" />
+        <entry key="..\:/Work/Android/AS-WorkSpace/namavatest/app/src/main/res/drawable-v24/ic_launcher_foreground.xml" value="0.1255" />
         <entry key="..\:/Work/Android/AS-WorkSpace/namavatest/app/src/main/res/drawable-v24/selector_btn_colorless.xml" value="0.1" />
+        <entry key="..\:/Work/Android/AS-WorkSpace/namavatest/app/src/main/res/drawable/circle.xml" value="0.1255" />
+        <entry key="..\:/Work/Android/AS-WorkSpace/namavatest/app/src/main/res/drawable/ic_comment.xml" value="0.124" />
+        <entry key="..\:/Work/Android/AS-WorkSpace/namavatest/app/src/main/res/drawable/ic_heart.xml" value="0.168" />
+        <entry key="..\:/Work/Android/AS-WorkSpace/namavatest/app/src/main/res/drawable/ic_heart_filled.xml" value="0.168" />
+        <entry key="..\:/Work/Android/AS-WorkSpace/namavatest/app/src/main/res/drawable/ic_image_error_placeholder.xml" value="0.1255" />
+        <entry key="..\:/Work/Android/AS-WorkSpace/namavatest/app/src/main/res/drawable/ic_image_placeholder.xml" value="0.1255" />
+        <entry key="..\:/Work/Android/AS-WorkSpace/namavatest/app/src/main/res/drawable/ic_launcher_background.xml" value="0.1255" />
+        <entry key="..\:/Work/Android/AS-WorkSpace/namavatest/app/src/main/res/drawable/ic_password_toggle_hidden.xml" value="0.1255" />
         <entry key="..\:/Work/Android/AS-WorkSpace/namavatest/app/src/main/res/drawable/ic_password_toggle_show.xml" value="0.1" />
+        <entry key="..\:/Work/Android/AS-WorkSpace/namavatest/app/src/main/res/drawable/ic_play_filled.xml" value="0.168" />
+        <entry key="..\:/Work/Android/AS-WorkSpace/namavatest/app/src/main/res/drawable/ic_search.xml" value="0.1255" />
         <entry key="..\:/Work/Android/AS-WorkSpace/namavatest/app/src/main/res/drawable/selector_btn_colorless.xml" value="0.1" />
         <entry key="..\:/Work/Android/AS-WorkSpace/namavatest/app/src/main/res/drawable/selector_password_toggle.xml" value="0.1" />
         <entry key="..\:/Work/Android/AS-WorkSpace/namavatest/app/src/main/res/layout/activity_main.xml" value="0.18333333333333332" />
         <entry key="..\:/Work/Android/AS-WorkSpace/namavatest/app/src/main/res/layout/activity_splash.xml" value="0.19739583333333333" />
+        <entry key="..\:/Work/Android/AS-WorkSpace/namavatest/app/src/main/res/layout/frag_detail.xml" value="0.22" />
         <entry key="..\:/Work/Android/AS-WorkSpace/namavatest/app/src/main/res/layout/frag_home.xml" value="0.18" />
         <entry key="..\:/Work/Android/AS-WorkSpace/namavatest/app/src/main/res/layout/item_video.xml" value="0.25" />
       </map>

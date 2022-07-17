@@ -7,6 +7,7 @@ import android.view.ViewGroup
 import android.view.inputmethod.EditorInfo
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.lifecycleScope
+import androidx.navigation.findNavController
 import dagger.hilt.android.AndroidEntryPoint
 import db.poorya.namavatest.databinding.FragHomeBinding
 import db.poorya.namavatest.domain.model.VideoModel
@@ -43,6 +44,9 @@ class HomeFragment : Fragment() {
             videoAdapter.onClickListener = {
                 // TODO: open detail fragment
                 requireContext().toast(it.title)
+                findNavController().navigate(
+                    HomeFragmentDirections.actionHomeFragToDetailFrag(it)
+                )
             }
             adapter = videoAdapter
         }

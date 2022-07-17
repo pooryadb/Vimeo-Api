@@ -9,6 +9,19 @@
     <fragment
         android:id="@+id/homeFrag"
         android:name="db.poorya.namavatest.presentation.main.HomeFragment"
-        tools:layout="@layout/frag_home" />
+        tools:layout="@layout/frag_home">
+        <action
+            android:id="@+id/action_homeFrag_to_detailFrag"
+            app:destination="@id/detailFrag" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/detailFrag"
+        android:name="db.poorya.namavatest.presentation.detail.DetailFragment"
+        tools:layout="@layout/frag_detail">
+        <argument
+            android:name="video"
+            app:argType="db.poorya.namavatest.domain.model.VideoModel" />
+    </fragment>
 
 </navigation>
