@@ -211,7 +211,7 @@
     <!--	text input-->
     <style name="input.outline" parent="Widget.MaterialComponents.TextInputLayout.OutlinedBox">
         <item name="hintTextAppearance">@style/txt.h1.bold</item>
-        <item name="shapeAppearance">@style/appearance.round.25</item>
+        <item name="shapeAppearance">@style/appearance.round.50</item>
         <item name="passwordToggleDrawable">@drawable/selector_password_toggle</item>
         <!--        <item name="hintAnimationEnabled">false</item>-->
         <!--        <item name="expandedHintEnabled">false</item>-->

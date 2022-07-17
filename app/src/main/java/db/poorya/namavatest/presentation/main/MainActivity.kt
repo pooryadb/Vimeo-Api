@@ -4,9 +4,11 @@ import android.content.Context
 import android.content.res.Configuration
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
+import dagger.hilt.android.AndroidEntryPoint
 import db.poorya.namavatest.databinding.ActivityMainBinding
 import db.poorya.namavatest.utils.language.LocaleUtils
 
+@AndroidEntryPoint
 class MainActivity : AppCompatActivity() {
 
     private var binding: ActivityMainBinding? = null
