@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <dimen name="padding_toolbar_images">10dp</dimen>
+
+    <dimen name="elevation">5dp</dimen>
+
+    <dimen name="margin">16dp</dimen>
+    <dimen name="padding">8dp</dimen>
+
+    <dimen name="icon_normal">24dp</dimen>
+    <dimen name="icon_big">48dp</dimen>
+
+    <dimen name="handle_width">50dp</dimen>
+
+</resources>
