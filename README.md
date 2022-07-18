@@ -5,4 +5,4 @@ Video.
 
 ## Install
 
-Apk files are available in the [GitHub Repository "export" folder](Vimeo-Api/blob/master/export/)
+Apk files are available in the [GitHub Repository "export" folder](export/)
