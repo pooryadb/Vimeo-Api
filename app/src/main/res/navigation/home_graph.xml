@@ -26,6 +26,18 @@
         <argument
             android:name="video"
             app:argType="db.poorya.namavatest.domain.model.local.VideoModel" />
+        <action
+            android:id="@+id/action_detailFrag_to_dplayerFrag"
+            app:destination="@id/dplayerFrag" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/dplayerFrag"
+        android:name="db.poorya.namavatest.presentation.player.PlayerFragment"
+        tools:layout="@layout/frag_player">
+        <argument
+            android:name="url"
+            app:argType="string" />
     </fragment>
 
 </navigation>

@@ -5,10 +5,12 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
+import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
 import dagger.hilt.android.AndroidEntryPoint
 import db.poorya.namavatest.databinding.FragDetailBinding
 import db.poorya.namavatest.ext.loadCompat
+
 
 @AndroidEntryPoint
 class DetailFragment : Fragment() {
@@ -34,7 +36,9 @@ class DetailFragment : Fragment() {
             tvDesc.text = args.video.description
             ivThumbnail.loadCompat(args.video.thumbnailUrl)
             ivThumbnail.setOnClickListener {
-                // TODO: open video player
+                findNavController().navigate(
+                    DetailFragmentDirections.actionDetailFragToDplayerFrag(args.video.videoLink)
+                )
             }
 
             tvPlayed.text = args.video.views.toString()
