@@ -1,4 +1,4 @@
-package db.poorya.namavatest.domain.model
+package db.poorya.namavatest.domain.model.local
 
 import android.os.Parcelable
 import kotlinx.parcelize.Parcelize
@@ -9,5 +9,10 @@ data class VideoModel(
     val title: String,
     val description: String,
     val thumbnailUrl: String,
-    val lengthSec: Long,
+    val duration: Long,
+    val comments: Long,
+    val likes: Long,
+    val views: Long,
+
+    val videoLink: String
 ) : Parcelable

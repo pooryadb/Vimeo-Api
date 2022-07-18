@@ -6,14 +6,12 @@ import android.view.View
 import android.view.ViewGroup
 import android.view.inputmethod.EditorInfo
 import androidx.fragment.app.Fragment
+import androidx.fragment.app.viewModels
 import androidx.lifecycle.lifecycleScope
 import androidx.navigation.findNavController
 import dagger.hilt.android.AndroidEntryPoint
 import db.poorya.namavatest.databinding.FragHomeBinding
-import db.poorya.namavatest.domain.model.VideoModel
-import db.poorya.namavatest.ext.hideKeyboard
-import db.poorya.namavatest.ext.onChange
-import db.poorya.namavatest.ext.toGone
+import db.poorya.namavatest.ext.*
 import db.poorya.namavatest.presentation.main.adapter.VideoAdapter
 import db.poorya.namavatest.utils.AppConfig
 import javax.inject.Inject
@@ -25,6 +23,8 @@ class HomeFragment : Fragment() {
     lateinit var videoAdapter: VideoAdapter
 
     private var binding: FragHomeBinding? = null
+
+    private val homeViewModel by viewModels<HomeViewModel>()
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -49,6 +49,7 @@ class HomeFragment : Fragment() {
             adapter = videoAdapter
         }
 
+        initObservers()
     }
 
     private fun setupEditTextSearch() = binding?.etQuery?.apply {
@@ -70,22 +71,29 @@ class HomeFragment : Fragment() {
     }
 
     private fun doSearch(query: String) {
-        binding?.layEmpty?.toGone()
-        videoAdapter.submitList(
-            (0..10).map {
-                VideoModel(
-                    it.toLong(),
-                    "Video $it",
-                    "Description $it".repeat(it + 1),
-                    "https://picsum.photos/320/180?random=$it",
-                    it * 15L
-                )
-            }
-        )
+        homeViewModel.searchVideo(query)
     }
 
     private fun initObservers() {
-        // TODO
+        homeViewModel.appLiveData.apply {
+            loadingApi.observe(viewLifecycleOwner) {
+                requireContext().toast(it.apiEnum.toString() + " -loading- " + it.load)
+            }
+
+            errorApi.observe(viewLifecycleOwner) {
+                requireContext().toast(it.msg ?: "error")
+            }
+        }
+
+        homeViewModel.liveSearchVideo.observe(viewLifecycleOwner) {
+            if (it.isNotEmpty()) {
+                binding?.layEmpty?.toGone()
+                videoAdapter.submitList(it)
+            } else {
+                binding?.layEmpty?.toShow()
+                videoAdapter.submitList(emptyList())
+            }
+        }
     }
 
 }

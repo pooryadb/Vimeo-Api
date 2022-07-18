@@ -37,9 +37,9 @@ class DetailFragment : Fragment() {
                 // TODO: open video player
             }
 
-            tvPlayed.text = 5000.toString()
-            tvLike.text = 4990.toString()
-            tvComment.text = 500.toString()
+            tvPlayed.text = args.video.views.toString()
+            tvLike.text = args.video.likes.toString()
+            tvComment.text = args.video.comments.toString()
         }
 
     }

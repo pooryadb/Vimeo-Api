@@ -7,7 +7,7 @@ import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import db.poorya.namavatest.databinding.ItemVideoBinding
-import db.poorya.namavatest.domain.model.VideoModel
+import db.poorya.namavatest.domain.model.local.VideoModel
 
 class VideoAdapter :
     ListAdapter<VideoModel, VideoVH>(VideoDiffCallback()) {

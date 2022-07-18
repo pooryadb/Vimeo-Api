@@ -2,7 +2,7 @@ package db.poorya.namavatest.presentation.main.adapter
 
 import androidx.recyclerview.widget.RecyclerView
 import db.poorya.namavatest.databinding.ItemVideoBinding
-import db.poorya.namavatest.domain.model.VideoModel
+import db.poorya.namavatest.domain.model.local.VideoModel
 import db.poorya.namavatest.ext.loadCompat
 
 class VideoVH(private val binding: ItemVideoBinding?) :

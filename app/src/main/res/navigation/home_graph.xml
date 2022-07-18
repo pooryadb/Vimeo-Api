@@ -25,7 +25,7 @@
         tools:layout="@layout/frag_detail">
         <argument
             android:name="video"
-            app:argType="db.poorya.namavatest.domain.model.VideoModel" />
+            app:argType="db.poorya.namavatest.domain.model.local.VideoModel" />
     </fragment>
 
 </navigation>
