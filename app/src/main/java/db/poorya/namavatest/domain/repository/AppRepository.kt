@@ -14,4 +14,8 @@ class AppRepository @Inject constructor(
         page: Int,
         perPage: Int
     ) = callApi { vimeoService.searchVideo(query, page, perPage) }
+
+    fun getVideoConfig(
+        videoId: Long
+    ) = callApi { vimeoService.getVideoConfig(videoId) }
 }

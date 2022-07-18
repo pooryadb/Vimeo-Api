@@ -5,17 +5,23 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
+import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
 import dagger.hilt.android.AndroidEntryPoint
+import db.poorya.namavatest.R
 import db.poorya.namavatest.databinding.FragDetailBinding
-import db.poorya.namavatest.ext.loadCompat
+import db.poorya.namavatest.ext.*
+import db.poorya.namavatest.presentation.main.HomeViewModel
+import db.poorya.namavatest.utils.state.AppApiErrorEnum
 
 
 @AndroidEntryPoint
 class DetailFragment : Fragment() {
 
     private var binding: FragDetailBinding? = null
+
+    private val homeViewModel by viewModels<HomeViewModel>()
 
     private val args by navArgs<DetailFragmentArgs>()
 
@@ -36,14 +42,52 @@ class DetailFragment : Fragment() {
             tvDesc.text = args.video.description
             ivThumbnail.loadCompat(args.video.thumbnailUrl)
             ivThumbnail.setOnClickListener {
-                findNavController().navigate(
-                    DetailFragmentDirections.actionDetailFragToDplayerFrag(args.video.videoLink)
-                )
+                homeViewModel.getVideoConfig(args.video.id)
             }
 
             tvPlayed.text = args.video.views.toString()
             tvLike.text = args.video.likes.toString()
             tvComment.text = args.video.comments.toString()
+        }
+
+        initObservers()
+    }
+
+    private fun initObservers() {
+        homeViewModel.appLiveData.apply {
+            loadingApi.observe(viewLifecycleOwner) {
+                if (it.load == true)
+                    binding?.prg?.toShow()
+                else
+                    binding?.prg?.toGone()
+            }
+
+            errorApi.observe(viewLifecycleOwner) {
+                val errorMsg: String = when (it.errorApiEnum.cast<AppApiErrorEnum>()) {
+                    AppApiErrorEnum.OnBadRequest -> {
+                        it.msg ?: getString(R.string.error)
+                    }
+                    AppApiErrorEnum.OnUnknownError,
+                    AppApiErrorEnum.OnConnectionLost -> {
+                        getString(R.string.error)
+                    }
+                    else -> {
+                        getString(R.string.error)
+                    }
+                }
+
+                requireContext().toast(errorMsg)
+            }
+        }
+
+        homeViewModel.liveVideoLink.observe(viewLifecycleOwner) {
+            if (it.isNotEmpty()) {
+                findNavController().navigate(
+                    DetailFragmentDirections.actionDetailFragToDplayerFrag(it)
+                )
+            } else {
+                requireContext().toast(getString(R.string.error))
+            }
         }
 
     }

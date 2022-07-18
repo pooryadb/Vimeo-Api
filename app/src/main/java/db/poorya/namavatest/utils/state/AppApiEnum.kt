@@ -6,6 +6,7 @@ enum class AppApiEnum : AppApi {
     Nothing,
 
     SearchVideo,
+    GetVideoConfig,
 
     ;
 }

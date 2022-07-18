@@ -7,6 +7,7 @@ import db.poorya.namavatest.base.architecture.BaseViewModel
 import db.poorya.namavatest.domain.model.local.VideoModel
 import db.poorya.namavatest.domain.repository.AppRepository
 import db.poorya.namavatest.utils.AppConfig
+import db.poorya.namavatest.utils.liveData.SingleLiveData
 import db.poorya.namavatest.utils.state.AppApiEnum
 import javax.inject.Inject
 
@@ -19,6 +20,10 @@ class HomeViewModel @Inject constructor(
     val liveSearchVideo: LiveData<List<VideoModel>>
         get() = _liveSearchVideo
 
+    private val _liveVideoLink = SingleLiveData<String>()
+    val liveVideoLink: LiveData<String>
+        get() = _liveVideoLink
+
     fun searchVideo(
         query: String,
     ) {
@@ -28,7 +33,7 @@ class HomeViewModel @Inject constructor(
         ) {
             _liveSearchVideo.value = it.data.mapIndexed { index, data ->
                 VideoModel(
-                    id = index.toLong(),
+                    id = data.uri?.split("/")?.last()?.toLongOrNull() ?: -1,
                     title = data.name ?: "",
                     description = data.description ?: "",
                     thumbnailUrl = data.pictures?.baseLink ?: "",
@@ -40,6 +45,15 @@ class HomeViewModel @Inject constructor(
                     videoLink = data.playerEmbedUrl ?: ""
                 )
             }
+        }
+    }
+
+    fun getVideoConfig(videoId: Long) {
+        callApi(
+            AppApiEnum.GetVideoConfig,
+            appRepository.getVideoConfig(videoId)
+        ) {
+            _liveVideoLink.value = it.request?.files?.hls?.cdns?.akfireInterconnectQuic?.url ?: ""
         }
     }
 

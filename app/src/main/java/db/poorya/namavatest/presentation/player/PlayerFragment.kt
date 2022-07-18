@@ -5,11 +5,11 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.webkit.WebSettings
-import android.webkit.WebView
-import android.webkit.WebViewClient
 import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.navArgs
+import com.google.android.exoplayer2.ExoPlayer
+import com.google.android.exoplayer2.MediaItem
+import com.google.android.exoplayer2.util.MimeTypes
 import dagger.hilt.android.AndroidEntryPoint
 import db.poorya.namavatest.databinding.FragPlayerBinding
 
@@ -20,6 +20,8 @@ class PlayerFragment : Fragment() {
     private var binding: FragPlayerBinding? = null
 
     private val args by navArgs<PlayerFragmentArgs>()
+
+    private var exoPlayer: ExoPlayer? = null
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -35,28 +37,33 @@ class PlayerFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        binding?.apply {
-            wv.webViewClient = object : WebViewClient() {
-                override fun shouldOverrideUrlLoading(view: WebView, url: String): Boolean {
-                    return false
-                }
-            }
-            val ws: WebSettings = wv.settings
-            ws.javaScriptEnabled = true
+        setupPlayer()
 
-            wv.loadDataWithBaseURL(
-                args.url,
-                "<iframe src=\"${args.url}\" width=\"100%\" height=\"100%\" frameborder=\"0\"></iframe>",
-                "text/html",
-                "utf-8",
-                null
-            )
+    }
+
+    private fun setupPlayer() {
+        exoPlayer = ExoPlayer.Builder(context!!).build()
+
+        exoPlayer?.apply {
+            val item = MediaItem.Builder()
+                .setUri(args.url)
+                .setMimeType(MimeTypes.APPLICATION_M3U8)
+                .build()
+
+            addMediaItem(item)
+            prepare()
         }
 
+        binding?.exoPlayer?.player = exoPlayer
+
+        exoPlayer?.play()
     }
 
     override fun onDestroyView() {
         requireActivity().requestedOrientation = ActivityInfo.SCREEN_ORIENTATION_UNSPECIFIED
+
+        exoPlayer?.release()
+
         super.onDestroyView()
     }
 

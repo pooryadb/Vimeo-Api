@@ -123,4 +123,10 @@ dependencies {
     //android svg
     api "com.caverock:androidsvg-aar:1.4"
 
+    //exo player
+    def exoV = "2.18.0"
+    api "com.google.android.exoplayer:exoplayer-core:$exoV"
+    api "com.google.android.exoplayer:exoplayer-hls:$exoV"
+    api "com.google.android.exoplayer:exoplayer-ui:$exoV"
+
 }
