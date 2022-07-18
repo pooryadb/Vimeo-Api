@@ -8,7 +8,8 @@ import android.view.inputmethod.EditorInfo
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
 import androidx.lifecycle.lifecycleScope
-import androidx.navigation.findNavController
+import androidx.navigation.fragment.findNavController
+import androidx.paging.PagingData
 import dagger.hilt.android.AndroidEntryPoint
 import db.poorya.namavatest.R
 import db.poorya.namavatest.databinding.FragHomeBinding
@@ -16,6 +17,7 @@ import db.poorya.namavatest.ext.*
 import db.poorya.namavatest.presentation.HomeViewModel
 import db.poorya.namavatest.presentation.main.adapter.VideoAdapter
 import db.poorya.namavatest.utils.AppConfig
+import db.poorya.namavatest.utils.StateAdapter
 import db.poorya.namavatest.utils.state.AppApiErrorEnum
 import javax.inject.Inject
 
@@ -24,6 +26,9 @@ class HomeFragment : Fragment() {
 
     @Inject
     lateinit var videoAdapter: VideoAdapter
+
+    @Inject
+    lateinit var stateAdapter: StateAdapter
 
     private var binding: FragHomeBinding? = null
 
@@ -65,27 +70,69 @@ class HomeFragment : Fragment() {
     }
 
     private fun doSearch(query: String) {
-        if (query != homeViewModel.searchText)
+        if (query.isEmpty()) {
+//            binding?.layEmpty?.toShow()
+            videoAdapter.submitData(lifecycle, PagingData.empty())
+        } else if (query != homeViewModel.searchText)
             homeViewModel.searchVideo(query)
     }
 
-    private fun setupRecyclerView() = binding?.rcVideos?.apply {
-        videoAdapter.onClickListener = {
-            findNavController().navigate(
-                HomeFragmentDirections.actionHomeFragToDetailFrag(it)
+    private fun setupRecyclerView() = binding?.apply {
+        videoAdapter.apply {
+
+            onClickListener = {
+                findNavController().navigate(
+                    HomeFragmentDirections.actionHomeFragToDetailFrag(it)
+                )
+            }
+
+            pagingStates(object : PagingStateListener {
+                override fun onEmpty() {
+                    "onEmpty".logE("loading")
+                    layEmpty.toShow()
+                    prg.toGone()
+                }
+
+                override fun onRefresh(isFresh: Boolean) {
+                    if (isFresh) {
+                        "onNewResult".logE("loading")
+                        if (itemCount <= AppConfig.ITEM_PER_PAGE)
+                            rcVideos.scrollToPosition(0)
+                    } else {
+                        "onRefresh".logE("loading")
+                        prg.toShow()
+                    }
+                }
+
+                override fun onShowContent() {
+                    "onShowContent".logE("loading")
+                    layEmpty.toGone()
+                    prg.toGone()
+                }
+
+                override fun onError(error: Throwable) {
+                    "onError1: $error".logE("loading")
+                    if (error is NullPointerException)
+                        submitData(lifecycle, PagingData.empty())
+                }
+
+            })
+
+        }
+
+        rcVideos.apply {
+            stateAdapter.onRetry = { videoAdapter.retry() }
+            adapter = videoAdapter.withLoadStateFooter(
+                stateAdapter
             )
         }
-        adapter = videoAdapter
     }
 
 
     private fun initObservers() {
         homeViewModel.appLiveData.apply {
             loadingApi.observe(viewLifecycleOwner) {
-                if (it.load == true)
-                    binding?.prg?.toShow()
-                else
-                    binding?.prg?.toGone()
+
             }
 
             errorApi.observe(viewLifecycleOwner) {
@@ -107,12 +154,9 @@ class HomeFragment : Fragment() {
         }
 
         homeViewModel.liveSearchVideo.observe(viewLifecycleOwner) {
-            if (it.isNotEmpty()) {
+            it?.let {
                 binding?.layEmpty?.toGone()
-                videoAdapter.submitList(it)
-            } else {
-                binding?.layEmpty?.toShow()
-                videoAdapter.submitList(emptyList())
+                videoAdapter.submitData(lifecycle, it)
             }
         }
 

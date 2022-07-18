@@ -323,7 +323,7 @@ data class VideoConfigResponse(
                     @SerializedName("id")
                     val id: String? = null,
                     @SerializedName("profile")
-                    val profile: Int? = null,
+                    val profile: String? = null,
                     @SerializedName("quality")
                     val quality: String? = null
                 )
@@ -334,7 +334,7 @@ data class VideoConfigResponse(
                     @SerializedName("id")
                     val id: String? = null,
                     @SerializedName("profile")
-                    val profile: Int? = null,
+                    val profile: String? = null,
                     @SerializedName("quality")
                     val quality: String? = null
                 )

@@ -9,11 +9,11 @@ class AppRepository @Inject constructor(
     private val vimeoService: VimeoService
 ) : BaseRepository() {
 
-    fun searchVideo(
+    suspend fun searchVideo(
         query: String,
         page: Int,
         perPage: Int
-    ) = callApi { vimeoService.searchVideo(query, page, perPage) }
+    ) = vimeoService.searchVideo(query, page, perPage)
 
     fun getVideoConfig(
         videoId: Long

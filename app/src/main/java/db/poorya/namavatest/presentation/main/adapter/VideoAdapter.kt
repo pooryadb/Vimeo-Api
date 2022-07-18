@@ -3,14 +3,14 @@ package db.poorya.namavatest.presentation.main.adapter
 import android.annotation.SuppressLint
 import android.view.LayoutInflater
 import android.view.ViewGroup
+import androidx.paging.PagingDataAdapter
 import androidx.recyclerview.widget.DiffUtil
-import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import db.poorya.namavatest.databinding.ItemVideoBinding
 import db.poorya.namavatest.domain.model.local.VideoModel
 
 class VideoAdapter :
-    ListAdapter<VideoModel, VideoVH>(VideoDiffCallback()) {
+    PagingDataAdapter<VideoModel, VideoVH>(VideoDiffCallback()) {
 
     var binding: ItemVideoBinding? = null
 
@@ -32,8 +32,10 @@ class VideoAdapter :
     }
 
     override fun onBindViewHolder(holder: VideoVH, position: Int) {
-        holder.adapter = this
-        holder.bind(getItem(position))
+        getItem(position)?.let {
+            holder.adapter = this
+            holder.bind(it)
+        }
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): VideoVH {

@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:clipToPadding="false"
+    android:gravity="center"
+    android:padding="16dp">
+
+    <ProgressBar
+        android:id="@+id/prgLoadState"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerInParent="true"
+        android:indeterminateTint="?attr/colorSecondary" />
+
+    <com.google.android.material.textview.MaterialTextView
+        android:id="@+id/txtRetryLoadState"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentStart="true"
+        android:layout_centerVertical="true"
+        android:layout_marginStart="@dimen/margin"
+        android:gravity="center"
+        android:text="@string/error"
+        android:textColor="?android:textColorHint" />
+
+    <com.google.android.material.button.MaterialButton
+        android:id="@+id/btnRetryLoadState"
+        style="@style/btn.colored"
+        android:layout_width="wrap_content"
+        android:layout_alignParentEnd="true"
+        android:layout_marginEnd="@dimen/margin"
+        android:text="@string/retry_" />
+
+</RelativeLayout>
