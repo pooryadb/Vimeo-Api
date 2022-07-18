@@ -18,11 +18,18 @@ class VideosResponse :
         val playerEmbedUrl: String? = "",
         @SerializedName("duration")
         val duration: Long? = 0,
+        @SerializedName("stats")
+        val stats: Stats? = null,
         @SerializedName("pictures")
         val pictures: Pictures? = null,
         @SerializedName("metadata")
         val metadata: MetaData? = null,
-        ) : BaseResponseListData() {
+    ) : BaseResponseListData() {
+
+        data class Stats(
+            @SerializedName("plays")
+            val plays: Long? = 0,
+        )
 
         data class Pictures(
             @SerializedName("base_link")

@@ -3,6 +3,7 @@ package db.poorya.namavatest.presentation.main.adapter
 import androidx.recyclerview.widget.RecyclerView
 import db.poorya.namavatest.databinding.ItemVideoBinding
 import db.poorya.namavatest.domain.model.local.VideoModel
+import db.poorya.namavatest.ext.formatSecToTime
 import db.poorya.namavatest.ext.loadCompat
 
 class VideoVH(private val binding: ItemVideoBinding?) :
@@ -20,6 +21,7 @@ class VideoVH(private val binding: ItemVideoBinding?) :
             ivThumbnail.loadCompat(item.thumbnailUrl)
             tvTitle.text = item.title
             tvDesc.text = item.description
+            tvDuration.text = item.duration.formatSecToTime()
         }
 
     }

@@ -24,6 +24,19 @@
         tools:srcCompat="@drawable/ic_image_placeholder" />
 
     <com.google.android.material.textview.MaterialTextView
+        android:id="@+id/tvDuration"
+        style="@style/txt.h0.medium"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_margin="@dimen/padding"
+        android:background="?attr/colorGlass"
+        android:paddingHorizontal="@dimen/padding"
+        android:textColor="?attr/colorControlHighlight"
+        app:layout_constraintBottom_toBottomOf="@id/ivThumbnail"
+        app:layout_constraintEnd_toEndOf="@id/ivThumbnail"
+        tools:text="3:58" />
+
+    <com.google.android.material.textview.MaterialTextView
         android:id="@+id/tvTitle"
         style="@style/txt.h3.bold"
         android:layout_width="0dp"

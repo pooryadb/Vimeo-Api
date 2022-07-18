@@ -84,7 +84,7 @@
             android:layout_gravity="center"
             android:layout_marginBottom="100dp"
             android:background="@drawable/circle"
-            android:backgroundTint="?attr/colorPrimary"
+            android:backgroundTint="?attr/colorGlass"
             android:indeterminateTint="?attr/colorSecondary"
             android:visibility="gone"
             tools:visibility="visible" />

@@ -26,7 +26,7 @@
         <item name="colorControlHighlight">#101010</item>
 
         <!-- custom color-->
-        <item name="colorGlass">#29FFFFFF</item>
+        <item name="colorGlass">#55FFFFFF</item>
 
         <!-- Status bar & navigation color. -->
         <item name="android:statusBarColor">?android:colorBackground</item>

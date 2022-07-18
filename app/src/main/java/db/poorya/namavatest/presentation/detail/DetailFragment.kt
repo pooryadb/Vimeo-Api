@@ -44,6 +44,7 @@ class DetailFragment : Fragment() {
             ivThumbnail.setOnClickListener {
                 homeViewModel.getVideoConfig(args.video.id)
             }
+            tvDuration.text = args.video.duration.formatSecToTime()
 
             tvPlayed.text = args.video.views.toString()
             tvLike.text = args.video.likes.toString()

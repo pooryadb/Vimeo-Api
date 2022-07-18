@@ -61,6 +61,18 @@
                 android:visibility="gone"
                 tools:visibility="visible" />
 
+            <com.google.android.material.textview.MaterialTextView
+                android:id="@+id/tvDuration"
+                style="@style/txt.h0.medium"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="bottom|end"
+                android:layout_margin="@dimen/margin"
+                android:background="?attr/colorGlass"
+                android:paddingHorizontal="@dimen/padding"
+                android:textColor="?attr/colorControlHighlight"
+                tools:text="3:58" />
+
         </FrameLayout>
 
         <androidx.constraintlayout.widget.ConstraintLayout

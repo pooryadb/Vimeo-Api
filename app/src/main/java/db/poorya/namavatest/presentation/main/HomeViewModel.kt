@@ -31,7 +31,7 @@ class HomeViewModel @Inject constructor(
             AppApiEnum.SearchVideo,
             appRepository.searchVideo(query, 1, AppConfig.ITEM_PER_PAGE)
         ) {
-            _liveSearchVideo.value = it.data.mapIndexed { index, data ->
+            _liveSearchVideo.value = it.data.map { data ->
                 VideoModel(
                     id = data.uri?.split("/")?.last()?.toLongOrNull() ?: -1,
                     title = data.name ?: "",
@@ -40,7 +40,7 @@ class HomeViewModel @Inject constructor(
                     duration = data.duration ?: 0,
                     comments = data.metadata?.connections?.comments?.total ?: 0,
                     likes = data.metadata?.connections?.likes?.total ?: 0,
-                    views = /*data.metadata?.connections?.comments?.total ?:*/ 0,
+                    views = data.stats?.plays ?: 0,
 
                     videoLink = data.playerEmbedUrl ?: ""
                 )
