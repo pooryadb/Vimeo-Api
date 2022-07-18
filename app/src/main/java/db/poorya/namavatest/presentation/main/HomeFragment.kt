@@ -6,13 +6,14 @@ import android.view.View
 import android.view.ViewGroup
 import android.view.inputmethod.EditorInfo
 import androidx.fragment.app.Fragment
-import androidx.fragment.app.viewModels
+import androidx.fragment.app.activityViewModels
 import androidx.lifecycle.lifecycleScope
 import androidx.navigation.findNavController
 import dagger.hilt.android.AndroidEntryPoint
 import db.poorya.namavatest.R
 import db.poorya.namavatest.databinding.FragHomeBinding
 import db.poorya.namavatest.ext.*
+import db.poorya.namavatest.presentation.HomeViewModel
 import db.poorya.namavatest.presentation.main.adapter.VideoAdapter
 import db.poorya.namavatest.utils.AppConfig
 import db.poorya.namavatest.utils.state.AppApiErrorEnum
@@ -26,7 +27,7 @@ class HomeFragment : Fragment() {
 
     private var binding: FragHomeBinding? = null
 
-    private val homeViewModel by viewModels<HomeViewModel>()
+    private val homeViewModel by activityViewModels<HomeViewModel>()
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -39,22 +40,13 @@ class HomeFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-
         setupEditTextSearch()
-
-        binding?.rcVideos?.apply {
-            videoAdapter.onClickListener = {
-                findNavController().navigate(
-                    HomeFragmentDirections.actionHomeFragToDetailFrag(it)
-                )
-            }
-            adapter = videoAdapter
-        }
+        setupRecyclerView()
 
         initObservers()
     }
 
-    private fun setupEditTextSearch() = binding?.etQuery?.apply {
+    private fun setupEditTextSearch() = binding?.tiQuery?.apply {
 
         editText?.onChange(AppConfig.SEARCH_DELAY_REMOTE, lifecycleScope) {
             doSearch(it)
@@ -73,8 +65,19 @@ class HomeFragment : Fragment() {
     }
 
     private fun doSearch(query: String) {
-        homeViewModel.searchVideo(query)
+        if (query != homeViewModel.searchText)
+            homeViewModel.searchVideo(query)
     }
+
+    private fun setupRecyclerView() = binding?.rcVideos?.apply {
+        videoAdapter.onClickListener = {
+            findNavController().navigate(
+                HomeFragmentDirections.actionHomeFragToDetailFrag(it)
+            )
+        }
+        adapter = videoAdapter
+    }
+
 
     private fun initObservers() {
         homeViewModel.appLiveData.apply {

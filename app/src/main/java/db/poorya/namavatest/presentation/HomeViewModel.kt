@@ -1,4 +1,4 @@
-package db.poorya.namavatest.presentation.main
+package db.poorya.namavatest.presentation
 
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
@@ -24,9 +24,13 @@ class HomeViewModel @Inject constructor(
     val liveVideoLink: LiveData<String>
         get() = _liveVideoLink
 
+    var searchText = ""
+
     fun searchVideo(
         query: String,
     ) {
+        searchText = query
+
         callApi(
             AppApiEnum.SearchVideo,
             appRepository.searchVideo(query, 1, AppConfig.ITEM_PER_PAGE)

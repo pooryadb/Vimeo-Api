@@ -9,7 +9,7 @@ import db.poorya.namavatest.utils.liveData.SingleLiveData
  */
 object AppLiveData {
 
-    var errorApi = SingleLiveData<ApiErrorModel>()
+    val errorApi = SingleLiveData<ApiErrorModel>()
     val loadingApi = SingleLiveData<ApiLoadingModel>()
 
 }

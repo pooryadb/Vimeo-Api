@@ -5,14 +5,14 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
-import androidx.fragment.app.viewModels
+import androidx.fragment.app.activityViewModels
 import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
 import dagger.hilt.android.AndroidEntryPoint
 import db.poorya.namavatest.R
 import db.poorya.namavatest.databinding.FragDetailBinding
 import db.poorya.namavatest.ext.*
-import db.poorya.namavatest.presentation.main.HomeViewModel
+import db.poorya.namavatest.presentation.HomeViewModel
 import db.poorya.namavatest.utils.state.AppApiErrorEnum
 
 
@@ -21,7 +21,7 @@ class DetailFragment : Fragment() {
 
     private var binding: FragDetailBinding? = null
 
-    private val homeViewModel by viewModels<HomeViewModel>()
+    private val homeViewModel by activityViewModels<HomeViewModel>()
 
     private val args by navArgs<DetailFragmentArgs>()
 

@@ -19,6 +19,7 @@
 
         <activity
             android:name=".presentation.main.MainActivity"
+            android:configChanges="orientation|screenSize|keyboardHidden"
             android:exported="true"
             android:screenOrientation="user"
             android:windowSoftInputMode="adjustResize">
