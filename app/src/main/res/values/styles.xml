@@ -233,10 +233,6 @@
         <item name="android:textDirection">anyRtl</item>
     </style>
 
-    <style name="edt.latin.digits" parent="edt">
-        <item name="fontFamily">@font/font_normal_latin_digits</item>
-    </style>
-
     <!--    animation-->
     <style name="animation.slide.up_down" parent="">
         <item name="android:windowEnterAnimation">@anim/slide_up</item>

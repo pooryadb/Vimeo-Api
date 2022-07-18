@@ -12,6 +12,8 @@ import com.google.android.exoplayer2.MediaItem
 import com.google.android.exoplayer2.util.MimeTypes
 import dagger.hilt.android.AndroidEntryPoint
 import db.poorya.namavatest.databinding.FragPlayerBinding
+import db.poorya.namavatest.ext.disableFullScreen
+import db.poorya.namavatest.ext.enableFullScreen
 
 
 @AndroidEntryPoint
@@ -27,7 +29,10 @@ class PlayerFragment : Fragment() {
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
-        requireActivity().requestedOrientation = ActivityInfo.SCREEN_ORIENTATION_LANDSCAPE
+        requireActivity().apply {
+            requestedOrientation = ActivityInfo.SCREEN_ORIENTATION_LANDSCAPE
+            enableFullScreen()
+        }
 
         binding = FragPlayerBinding.inflate(inflater, container, false)
 
@@ -60,7 +65,10 @@ class PlayerFragment : Fragment() {
     }
 
     override fun onDestroyView() {
-        requireActivity().requestedOrientation = ActivityInfo.SCREEN_ORIENTATION_UNSPECIFIED
+        requireActivity().apply {
+            requestedOrientation = ActivityInfo.SCREEN_ORIENTATION_UNSPECIFIED
+            disableFullScreen()
+        }
 
         exoPlayer?.release()
 
