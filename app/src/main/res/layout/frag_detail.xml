@@ -35,6 +35,7 @@
                 android:foreground="?attr/selectableItemBackground"
                 android:minHeight="200dp"
                 android:padding="@dimen/padding"
+                android:scaleType="centerCrop"
                 tools:src="@drawable/ic_image_placeholder" />
 
             <androidx.appcompat.widget.AppCompatImageView

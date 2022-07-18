@@ -11,8 +11,5 @@ object AppLiveData {
 
     var errorApi = SingleLiveData<ApiErrorModel>()
     val loadingApi = SingleLiveData<ApiLoadingModel>()
-    val retryApi = SingleLiveData<MutableList<Pair<AppApi, (() -> Unit)?>>>()
-    val cancelRetryApi = SingleLiveData<AppApi>()
-    var retrievableApis = mutableListOf<Pair<AppApi, (() -> Unit)?>>()
 
 }

@@ -10,10 +10,12 @@ import androidx.fragment.app.viewModels
 import androidx.lifecycle.lifecycleScope
 import androidx.navigation.findNavController
 import dagger.hilt.android.AndroidEntryPoint
+import db.poorya.namavatest.R
 import db.poorya.namavatest.databinding.FragHomeBinding
 import db.poorya.namavatest.ext.*
 import db.poorya.namavatest.presentation.main.adapter.VideoAdapter
 import db.poorya.namavatest.utils.AppConfig
+import db.poorya.namavatest.utils.state.AppApiErrorEnum
 import javax.inject.Inject
 
 @AndroidEntryPoint
@@ -77,11 +79,27 @@ class HomeFragment : Fragment() {
     private fun initObservers() {
         homeViewModel.appLiveData.apply {
             loadingApi.observe(viewLifecycleOwner) {
-                requireContext().toast(it.apiEnum.toString() + " -loading- " + it.load)
+                if (it.load == true)
+                    binding?.prg?.toShow()
+                else
+                    binding?.prg?.toGone()
             }
 
             errorApi.observe(viewLifecycleOwner) {
-                requireContext().toast(it.msg ?: "error")
+                val errorMsg: String = when (it.errorApiEnum.cast<AppApiErrorEnum>()) {
+                    AppApiErrorEnum.OnBadRequest -> {
+                        it.msg ?: getString(R.string.error)
+                    }
+                    AppApiErrorEnum.OnUnknownError,
+                    AppApiErrorEnum.OnConnectionLost -> {
+                        getString(R.string.error)
+                    }
+                    else -> {
+                        getString(R.string.error)
+                    }
+                }
+
+                requireContext().toast(errorMsg)
             }
         }
 
@@ -94,6 +112,7 @@ class HomeFragment : Fragment() {
                 videoAdapter.submitList(emptyList())
             }
         }
+
     }
 
 }

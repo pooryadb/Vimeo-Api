@@ -67,36 +67,39 @@ open class BaseViewModel : ViewModel() {
         var dispatchRetry: (() -> Unit)? = null
         dispatchRetry = {
             viewModelScope.launch {
-                networkCall.onStart {
-                    appLiveData.loadingApi.value = ApiLoadingModel(apiEnum, true)
-                }.catch {
-                    it.printStackTrace()
-                    appLiveData.loadingApi.value = ApiLoadingModel(apiEnum, null)
-                    ErrorHandler(
-                        it,
-                        apiEnum,
-                        appLiveData.errorApi,
-                        dispatchRetry = dispatchRetry
-                    )
-                }.collect { response ->
-                    if (response.isSuccessful) {
-                        response.body()?.let {
-                            liveResult?.value = it
-                            appLiveData.loadingApi.value =
-                                ApiLoadingModel(apiEnum, false)
-                            onResponse?.invoke(it)
-                        }
-                    } else {
-                        appLiveData.loadingApi.value =
-                            ApiLoadingModel(apiEnum, null)
+                networkCall
+                    .onStart {
+                        appLiveData.loadingApi.value = ApiLoadingModel(apiEnum, true)
+                    }
+                    .catch {
+                        it.printStackTrace()
+                        appLiveData.loadingApi.value = ApiLoadingModel(apiEnum, null)
                         ErrorHandler(
-                            Pair(response.code(), response.errorBody()),
+                            it,
                             apiEnum,
                             appLiveData.errorApi,
                             dispatchRetry = dispatchRetry
                         )
                     }
-                }
+                    .collect { response ->
+                        if (response.isSuccessful) {
+                            response.body()?.let {
+                                liveResult?.value = it
+                                appLiveData.loadingApi.value =
+                                    ApiLoadingModel(apiEnum, false)
+                                onResponse?.invoke(it)
+                            }
+                        } else {
+                            appLiveData.loadingApi.value =
+                                ApiLoadingModel(apiEnum, null)
+                            ErrorHandler(
+                                Pair(response.code(), response.errorBody()),
+                                apiEnum,
+                                appLiveData.errorApi,
+                                dispatchRetry = dispatchRetry
+                            )
+                        }
+                    }
             }
 
         }

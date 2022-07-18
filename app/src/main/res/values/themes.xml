@@ -5,8 +5,8 @@
         <item name="colorPrimaryVariant">#FF3700B3</item>
         <item name="colorOnPrimary">#FFFFFF</item>
 
-        <item name="colorSecondary">#FF03DAC5</item>
-        <item name="colorSecondaryVariant">#FF018786</item>
+        <item name="colorSecondary">#FF5722</item>
+        <item name="colorSecondaryVariant">#AF2E06</item>
         <item name="colorOnSecondary">#000000</item>
 
         <item name="colorSurface">#FFFFFF</item>

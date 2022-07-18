@@ -20,11 +20,7 @@ data class ApiErrorModel(
 
     override fun toString(): String {
         return "ApiErrorModel(" +
-                "apiEnum: $apiEnum{" +
-                "retryType: ${apiEnum.retryType()}," +
-                " loadingType: ${apiEnum.loadingType()}," +
-                " isPaging: ${apiEnum.isPaging()}" +
-                "}" +
+                "apiEnum: $apiEnum" +
                 ", errorApiEnum: $errorApiEnum, " +
                 "msg: $msg, page: $page)"
     }

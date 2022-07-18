@@ -7,7 +7,4 @@ enum class AppApiErrorEnum : AppErrorApi {
     OnUnknownError,
     OnConnectionLost,
     OnBadRequest,
-
-    OnUnauthorized,
-    LogOut,
 }

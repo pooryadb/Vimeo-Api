@@ -1,8 +1,10 @@
 package db.poorya.namavatest.utils
 
 import androidx.lifecycle.MutableLiveData
+import com.google.gson.Gson
 import db.poorya.namavatest.base.other.ApiErrorModel
 import db.poorya.namavatest.base.other.AppApi
+import db.poorya.namavatest.domain.model.remote.ErrorResponse
 import db.poorya.namavatest.ext.logE
 import db.poorya.namavatest.utils.state.AppApiErrorEnum.*
 import kotlinx.coroutines.CancellationException
@@ -33,29 +35,23 @@ class ErrorHandler {
     ) {
         try {
             val bodyString = e.second?.string()
-            /*val response: ErrorResponse =
+            val response: ErrorResponse =
                 Gson().fromJson(bodyString, ErrorResponse::class.java)
             response.logE("ErrorHandler 1")
             when (e.first) {
                 400 -> {//bad request > toast all
                     liveData.value =
                         ApiErrorModel(
-                            appApi, OnBadRequest, response.description, page
-                        )
-                }
-                401 -> { //unauthorized > logout
-                    liveData.value =
-                        ApiErrorModel(
-                            appApi, OnUnauthorized, response.description, page
+                            appApi, OnBadRequest, response.error, page
                         )
                 }
                 else -> {
                     liveData.value =
                         ApiErrorModel(
-                            appApi, OnUnknownError, response.description, page
+                            appApi, OnUnknownError, response.error, page
                         )
                 }
-            }*/
+            }
         } catch (e: Exception) {
             e.logE("ErrorHandler 2")
             liveData.value = ApiErrorModel(
@@ -86,7 +82,7 @@ class ErrorHandler {
                 OnConnectionLost,
                 "OnConnectionLost_error",
                 page, dispatchRetry
-            )// TODO: 4/5/2021 use getString()
+            )
         } else if (e is CancellationException) {
             "paging canceled".logE("ErrorHandler")
         } else {

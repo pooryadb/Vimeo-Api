@@ -77,6 +77,18 @@
 
         </androidx.appcompat.widget.LinearLayoutCompat>
 
+        <ProgressBar
+            android:id="@+id/prg"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_marginBottom="100dp"
+            android:background="@drawable/circle"
+            android:backgroundTint="?attr/colorPrimary"
+            android:indeterminateTint="?attr/colorSecondary"
+            android:visibility="gone"
+            tools:visibility="visible" />
+
     </FrameLayout>
 
 </androidx.appcompat.widget.LinearLayoutCompat>
