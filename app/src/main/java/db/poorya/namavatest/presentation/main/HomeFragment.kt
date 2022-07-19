@@ -137,9 +137,8 @@ class HomeFragment : Fragment() {
                     AppApiErrorEnum.OnBadRequest -> {
                         it.msg ?: getString(R.string.error)
                     }
-                    AppApiErrorEnum.OnUnknownError,
                     AppApiErrorEnum.OnConnectionLost -> {
-                        getString(R.string.error)
+                        getString(R.string.no_internet_connection)
                     }
                     else -> {
                         getString(R.string.error)
