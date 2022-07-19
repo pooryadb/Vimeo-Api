@@ -88,30 +88,30 @@ class HomeFragment : Fragment() {
 
             pagingStates(object : PagingStateListener {
                 override fun onEmpty() {
-                    "onEmpty".logE("loading")
+                    "onEmpty".logD("loading")
                     layEmpty.toShow()
                     prg.toGone()
                 }
 
                 override fun onRefresh(isFresh: Boolean) {
                     if (isFresh) {
-                        "onNewResult".logE("loading")
+                        "onNewResult".logD("loading")
                         if (itemCount <= AppConfig.ITEM_PER_PAGE)
                             rcVideos.scrollToPosition(0)
                     } else {
-                        "onRefresh".logE("loading")
+                        "onRefresh".logD("loading")
                         prg.toShow()
                     }
                 }
 
                 override fun onShowContent() {
-                    "onShowContent".logE("loading")
+                    "onShowContent".logD("loading")
                     layEmpty.toGone()
                     prg.toGone()
                 }
 
                 override fun onError(error: Throwable) {
-                    "onError1: $error".logE("loading")
+                    "onError1: $error".logD("loading")
                     if (error is NullPointerException)
                         submitData(lifecycle, PagingData.empty())
                 }
@@ -149,6 +149,7 @@ class HomeFragment : Fragment() {
                     }
                 }
 
+                binding?.prg?.toGone()
                 requireContext().toast(errorMsg)
             }
         }
@@ -160,6 +161,11 @@ class HomeFragment : Fragment() {
             }
         }
 
+    }
+
+    override fun onDestroyView() {
+        binding = null
+        super.onDestroyView()
     }
 
 }

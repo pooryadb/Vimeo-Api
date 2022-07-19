@@ -16,7 +16,7 @@ fun PagingDataAdapter<*, *>.pagingStates(listener: PagingStateListener) {
             loadState.refresh is LoadState.NotLoading &&
                     loadState.append.endOfPaginationReached &&
                     itemCount < 1
-        "loadState: $loadState".logE("pagingStates")
+        "loadState: $loadState".logD("pagingStates")
         when {
             isEmpty -> listener.onEmpty()
             loadState.refresh is LoadState.Loading -> listener.onRefresh(false)

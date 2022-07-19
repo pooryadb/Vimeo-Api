@@ -5,6 +5,7 @@ import androidx.paging.PagingState
 import db.poorya.namavatest.base.other.ApiLoadingModel
 import db.poorya.namavatest.base.other.AppApi
 import db.poorya.namavatest.base.other.AppLiveData
+import db.poorya.namavatest.ext.logD
 import db.poorya.namavatest.ext.logE
 import db.poorya.namavatest.utils.AppConfig
 import db.poorya.namavatest.utils.ErrorHandler
@@ -25,7 +26,7 @@ abstract class BaseDataSource<RESPONSE : BaseResponseList<DATA>, DATA : BaseResp
             val response = getResponse(page, params.loadSize)
             if (response.isSuccessful) {
 
-                response.logE("PagingSource response")
+                response.logD("PagingSource response")
                 if (response.body() != null) {
 
                     appLiveData.loadingApi.value = ApiLoadingModel(apiEnum, false, page)

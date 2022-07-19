@@ -5,6 +5,7 @@ import com.google.gson.Gson
 import db.poorya.namavatest.base.other.ApiErrorModel
 import db.poorya.namavatest.base.other.AppApi
 import db.poorya.namavatest.domain.model.remote.ErrorResponse
+import db.poorya.namavatest.ext.logD
 import db.poorya.namavatest.ext.logE
 import db.poorya.namavatest.utils.state.AppApiErrorEnum.*
 import kotlinx.coroutines.CancellationException
@@ -37,7 +38,7 @@ class ErrorHandler {
             val bodyString = e.second?.string()
             val response: ErrorResponse =
                 Gson().fromJson(bodyString, ErrorResponse::class.java)
-            response.logE("ErrorHandler 1")
+            response.logD("ErrorHandler 1")
             when (e.first) {
                 400 -> {//bad request > toast all
                     liveData.value =

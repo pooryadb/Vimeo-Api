@@ -29,4 +29,9 @@ class MainActivity : AppCompatActivity() {
         LocaleUtils.setLocale(this)
     }
 
+    override fun onStart() {
+        binding = null
+        super.onStart()
+    }
+
 }

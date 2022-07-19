@@ -93,4 +93,9 @@ class DetailFragment : Fragment() {
 
     }
 
+    override fun onDestroyView() {
+        binding = null
+        super.onDestroyView()
+    }
+
 }

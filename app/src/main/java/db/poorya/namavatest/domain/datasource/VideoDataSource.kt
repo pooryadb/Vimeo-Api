@@ -7,6 +7,7 @@ import db.poorya.namavatest.base.other.AppApi
 import db.poorya.namavatest.base.other.AppLiveData
 import db.poorya.namavatest.domain.model.local.VideoModel
 import db.poorya.namavatest.domain.repository.AppRepository
+import db.poorya.namavatest.ext.logD
 import db.poorya.namavatest.ext.logE
 import db.poorya.namavatest.utils.AppConfig
 import db.poorya.namavatest.utils.ErrorHandler
@@ -27,7 +28,7 @@ class VideoDataSource(
             val response = appRepository.searchVideo(searchText, page, AppConfig.ITEM_PER_PAGE)
             if (response.isSuccessful) {
 
-                response.logE("PagingSource response")
+                response.logD("PagingSource response")
                 if (response.body() != null) {
 
                     appLiveData.loadingApi.value = ApiLoadingModel(apiEnum, false, page)

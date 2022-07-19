@@ -72,6 +72,7 @@ class PlayerFragment : Fragment() {
 
         exoPlayer?.release()
 
+        binding = null
         super.onDestroyView()
     }
 
