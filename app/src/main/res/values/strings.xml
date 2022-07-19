@@ -5,4 +5,5 @@
     <string name="please_search_title_to_show_videos">لطفا برای نمایش ویدئو عنوانی را جست و جو کنید</string>
     <string name="error">error</string>
     <string name="retry_">Retry</string>
+    <string name="search_some_words">Search some words…</string>
 </resources>

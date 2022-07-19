@@ -15,6 +15,9 @@
         android:layout_height="wrap_content"
         android:layout_marginHorizontal="@dimen/margin"
         android:layout_marginTop="@dimen/margin"
+        app:boxBackgroundColor="?attr/colorControlHighlight"
+        app:hintEnabled="false"
+        app:placeholderText="@string/search_some_words"
         app:endIconDrawable="@drawable/ic_close"
         app:endIconMode="clear_text"
         app:startIconDrawable="@drawable/ic_search">
@@ -87,7 +90,7 @@
             android:layout_gravity="center"
             android:background="@drawable/circle"
             android:backgroundTint="?attr/colorGlass"
-            android:indeterminateTint="?attr/colorSecondary"
+            android:indeterminateTint="?attr/colorPrimaryDark"
             android:visibility="gone"
             tools:visibility="visible" />
 

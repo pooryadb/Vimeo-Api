@@ -14,7 +14,7 @@ import dagger.hilt.android.AndroidEntryPoint
 import db.poorya.namavatest.R
 import db.poorya.namavatest.databinding.FragHomeBinding
 import db.poorya.namavatest.ext.*
-import db.poorya.namavatest.presentation.HomeViewModel
+import db.poorya.namavatest.presentation.AppViewModel
 import db.poorya.namavatest.presentation.main.adapter.VideoAdapter
 import db.poorya.namavatest.utils.AppConfig
 import db.poorya.namavatest.utils.StateAdapter
@@ -45,6 +45,7 @@ class HomeFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+
         setupEditTextSearch()
         setupRecyclerView()
 
@@ -71,7 +72,6 @@ class HomeFragment : Fragment() {
 
     private fun doSearch(query: String) {
         if (query.isEmpty()) {
-//            binding?.layEmpty?.toShow()
             videoAdapter.submitData(lifecycle, PagingData.empty())
         } else if (query != homeViewModel.searchText)
             homeViewModel.searchVideo(query)
@@ -150,7 +150,8 @@ class HomeFragment : Fragment() {
                 }
 
                 binding?.prg?.toGone()
-                requireContext().toast(errorMsg)
+                binding?.tiQuery?.error = errorMsg
+                appViewModel.searchText = ""
             }
         }
 
