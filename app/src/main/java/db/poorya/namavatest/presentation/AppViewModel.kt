@@ -13,7 +13,7 @@ import db.poorya.namavatest.utils.state.AppApiEnum
 import javax.inject.Inject
 
 @HiltViewModel
-class HomeViewModel @Inject constructor(
+class AppViewModel @Inject constructor(
     private val appRepository: AppRepository
 ) : BaseViewModel() {
 
@@ -38,7 +38,7 @@ class HomeViewModel @Inject constructor(
                 AppApiEnum.SearchVideo,
                 appRepository,
                 appLiveData,
-                this.searchText
+                query
             )
         )
     }

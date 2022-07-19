@@ -12,7 +12,8 @@ import dagger.hilt.android.AndroidEntryPoint
 import db.poorya.namavatest.R
 import db.poorya.namavatest.databinding.FragDetailBinding
 import db.poorya.namavatest.ext.*
-import db.poorya.namavatest.presentation.HomeViewModel
+import db.poorya.namavatest.presentation.AppViewModel
+import db.poorya.namavatest.utils.state.AppApiEnum
 import db.poorya.namavatest.utils.state.AppApiErrorEnum
 
 
@@ -21,7 +22,7 @@ class DetailFragment : Fragment() {
 
     private var binding: FragDetailBinding? = null
 
-    private val homeViewModel by activityViewModels<HomeViewModel>()
+    private val appViewModel by activityViewModels<AppViewModel>()
 
     private val args by navArgs<DetailFragmentArgs>()
 
@@ -42,7 +43,7 @@ class DetailFragment : Fragment() {
             tvDesc.text = args.video.description
             ivThumbnail.loadCompat(args.video.thumbnailUrl)
             ivThumbnail.setOnClickListener {
-                homeViewModel.getVideoConfig(args.video.id)
+                appViewModel.getVideoConfig(args.video.id)
             }
             tvDuration.text = args.video.duration.formatSecToTime()
 
@@ -55,12 +56,17 @@ class DetailFragment : Fragment() {
     }
 
     private fun initObservers() {
-        homeViewModel.appLiveData.apply {
+        appViewModel.appLiveData.apply {
             loadingApi.observe(viewLifecycleOwner) {
-                if (it.load == true)
-                    binding?.prg?.toShow()
-                else
-                    binding?.prg?.toGone()
+                when (it.apiEnum.cast<AppApiEnum>()) {
+                    AppApiEnum.GetVideoConfig -> {
+                        if (it.load == true)
+                            binding?.prg?.toShow()
+                        else
+                            binding?.prg?.toGone()
+                    }
+                    else -> {}
+                }
             }
 
             errorApi.observe(viewLifecycleOwner) {
@@ -81,7 +87,7 @@ class DetailFragment : Fragment() {
             }
         }
 
-        homeViewModel.liveVideoLink.observe(viewLifecycleOwner) {
+        appViewModel.liveVideoLink.observe(viewLifecycleOwner) {
             if (it.isNotEmpty()) {
                 findNavController().navigate(
                     DetailFragmentDirections.actionDetailFragToDplayerFrag(it)

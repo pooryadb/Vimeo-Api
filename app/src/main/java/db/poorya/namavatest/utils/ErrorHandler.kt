@@ -31,8 +31,7 @@ class ErrorHandler {
         e: Pair<Int, ResponseBody?>,
         appApi: AppApi,
         liveData: MutableLiveData<ApiErrorModel>,
-        page: Int = AppConfig.FIRST_PAGE_NUMBER,
-        dispatchRetry: (() -> Unit)? = null
+        page: Int = AppConfig.FIRST_PAGE_NUMBER
     ) {
         try {
             val bodyString = e.second?.string()
@@ -57,7 +56,7 @@ class ErrorHandler {
             e.logE("ErrorHandler 2")
             liveData.value = ApiErrorModel(
                 appApi, OnConnectionLost, null,
-                page, dispatchRetry
+                page
             )
         }
     }
@@ -71,8 +70,7 @@ class ErrorHandler {
         e: Throwable,
         appApi: AppApi,
         liveData: MutableLiveData<ApiErrorModel>,
-        page: Int = AppConfig.FIRST_PAGE_NUMBER,
-        dispatchRetry: (() -> Unit)? = null
+        page: Int = AppConfig.FIRST_PAGE_NUMBER
     ) {
         e.logE("ErrorHandler 3")
         if (e is ConnectException || e is UnknownHostException || e is IOException
@@ -82,7 +80,7 @@ class ErrorHandler {
                 appApi,
                 OnConnectionLost,
                 "OnConnectionLost_error",
-                page, dispatchRetry
+                page
             )
         } else if (e is CancellationException) {
             "paging canceled".logE("ErrorHandler")

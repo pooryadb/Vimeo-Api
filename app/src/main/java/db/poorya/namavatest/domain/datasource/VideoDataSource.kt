@@ -19,7 +19,6 @@ class VideoDataSource(
     private val searchText: String = ""
 ) : PagingSource<Int, VideoModel>() {
 
-    var dispatchRetry: (() -> Unit)? = null
     var page = 0
     override suspend fun load(params: LoadParams<Int>): LoadResult<Int, VideoModel> {
         page = params.key ?: AppConfig.FIRST_PAGE_NUMBER
@@ -58,8 +57,7 @@ class VideoDataSource(
                         Pair(response.code(), response.errorBody()),
                         apiEnum,
                         appLiveData.errorApi,
-                        page,
-                        dispatchRetry
+                        page
                     )
                     appLiveData.loadingApi.value = ApiLoadingModel(apiEnum, null, page)
 
@@ -74,8 +72,7 @@ class VideoDataSource(
                     Pair(response.code(), response.errorBody()),
                     apiEnum,
                     appLiveData.errorApi,
-                    page,
-                    dispatchRetry
+                    page
                 )
                 appLiveData.loadingApi.value = ApiLoadingModel(apiEnum, null, page)
 
@@ -86,7 +83,7 @@ class VideoDataSource(
             }
 
         } catch (exception: Exception) {
-            ErrorHandler(exception, apiEnum, appLiveData.errorApi, page, dispatchRetry)
+            ErrorHandler(exception, apiEnum, appLiveData.errorApi, page)
             appLiveData.loadingApi.value = ApiLoadingModel(apiEnum, null, page)
 
             exception.logE("PagingSource error3")

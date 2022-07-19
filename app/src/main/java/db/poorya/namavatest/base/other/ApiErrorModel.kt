@@ -15,7 +15,6 @@ data class ApiErrorModel(
     val errorApiEnum: AppErrorApi,
     val msg: String?,
     val page: Int = AppConfig.FIRST_PAGE_NUMBER,
-    var dispatchRetry: (() -> Unit)? = null
 ) {
 
     override fun toString(): String {

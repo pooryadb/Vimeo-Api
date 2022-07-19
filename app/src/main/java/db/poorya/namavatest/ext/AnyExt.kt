@@ -2,8 +2,6 @@ package db.poorya.namavatest.ext
 
 import android.annotation.SuppressLint
 import android.util.Log
-import android.view.View
-import android.view.ViewGroup
 import db.poorya.namavatest.BuildConfig
 
 @SuppressLint("LogNotTimber")
@@ -32,12 +30,4 @@ inline fun <reified NEW> Any.cast(): NEW? {
 
 inline fun <reified NEW> Any.isCastable(): Boolean {
     return this is NEW
-}
-
-fun View.setMargins(left: Int, top: Int, right: Int, bottom: Int) {
-    if (layoutParams is ViewGroup.MarginLayoutParams) {
-        val p = layoutParams as ViewGroup.MarginLayoutParams
-        p.setMargins(left, top, right, bottom)
-        requestLayout()
-    }
 }

@@ -32,7 +32,7 @@ class HomeFragment : Fragment() {
 
     private var binding: FragHomeBinding? = null
 
-    private val homeViewModel by activityViewModels<HomeViewModel>()
+    private val appViewModel by activityViewModels<AppViewModel>()
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -73,8 +73,8 @@ class HomeFragment : Fragment() {
     private fun doSearch(query: String) {
         if (query.isEmpty()) {
             videoAdapter.submitData(lifecycle, PagingData.empty())
-        } else if (query != homeViewModel.searchText)
-            homeViewModel.searchVideo(query)
+        } else if (query != appViewModel.searchText)
+            appViewModel.searchVideo(query)
     }
 
     private fun setupRecyclerView() = binding?.apply {
@@ -130,10 +130,7 @@ class HomeFragment : Fragment() {
 
 
     private fun initObservers() {
-        homeViewModel.appLiveData.apply {
-            loadingApi.observe(viewLifecycleOwner) {
-
-            }
+        appViewModel.appLiveData.apply {
 
             errorApi.observe(viewLifecycleOwner) {
                 val errorMsg: String = when (it.errorApiEnum.cast<AppApiErrorEnum>()) {
@@ -155,7 +152,8 @@ class HomeFragment : Fragment() {
             }
         }
 
-        homeViewModel.liveSearchVideo.observe(viewLifecycleOwner) {
+        appViewModel.liveSearchVideo.observe(viewLifecycleOwner) {
+            binding?.tiQuery?.error = null
             it?.let {
                 binding?.layEmpty?.toGone()
                 videoAdapter.submitData(lifecycle, it)

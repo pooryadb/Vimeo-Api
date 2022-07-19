@@ -65,12 +65,12 @@ class PlayerFragment : Fragment() {
     }
 
     override fun onDestroyView() {
+        exoPlayer?.release()
+
         requireActivity().apply {
             requestedOrientation = ActivityInfo.SCREEN_ORIENTATION_UNSPECIFIED
             disableFullScreen()
         }
-
-        exoPlayer?.release()
 
         binding = null
         super.onDestroyView()
